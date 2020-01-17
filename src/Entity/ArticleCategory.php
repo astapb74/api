@@ -39,12 +39,6 @@ class ArticleCategory
         $this->category = new Category();
     }
 
-    // public function __toString()
-    // {
-    //     $this->article = $this->article->title;
-    //     $this->category = $this->category->name;
-    // }
-
     public function getId(): ?int
     {
         return $this->id;

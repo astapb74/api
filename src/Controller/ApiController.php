@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends AbstractController
 {
+
+
+    protected $username = 'apiuser';
+    protected $password = '123456';
     /**
      * @Route("/", name="api")
      */
@@ -22,6 +26,13 @@ class ApiController extends AbstractController
      */
     public function category(Request $request)
     {
+
+        $username = $request->headers->get('php-auth-user');
+        $password = $request->headers->get('php-auth-pw');
+
+        if ($username != $this->username || $password != $this->password) {
+            return $this->json(['error' => ['code' => 0, 'message' => 'Error auth...']]);
+        }
 
         $repository = $this->getDoctrine()->getRepository(Category::class);
 
@@ -40,6 +51,13 @@ class ApiController extends AbstractController
      */
     public function article(Request $request)
     {
+
+        $username = $request->headers->get('php-auth-user');
+        $password = $request->headers->get('php-auth-pw');
+
+        if ($username != $this->username || $password != $this->password) {
+            return $this->json(['error' => ['code' => 0, 'message' => 'Error auth...']]);
+        }
 
         $repository = $this->getDoctrine()->getRepository(Article::class);
 

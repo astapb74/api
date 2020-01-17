@@ -59,6 +59,7 @@ class Article
 
     public function setTitle(string $title): self
     {
+        $this->updated_at = new \DateTime();
         $this->title = $title;
 
         return $this;
@@ -71,6 +72,7 @@ class Article
 
     public function setText(string $text): self
     {
+        $this->updated_at = new \DateTime();
         $this->text = $text;
 
         return $this;

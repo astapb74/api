@@ -26,7 +26,7 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.title = :val')
-            ->setParameter('val', $title)
+            ->setParameter('val', "%$title%")
             ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

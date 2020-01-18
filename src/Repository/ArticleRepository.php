@@ -27,8 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.title LIKE :val')
             ->setParameter('val', "%$title%")
-            ->andWhere('a.deleted_at IS NULL')
-            ->orderBy('a.id', 'ASC')
+            ->orderBy('a.created_at', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -41,7 +40,6 @@ class ArticleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.id = :val')
             ->setParameter('val', $id)
-            ->andWhere('a.deleted_at IS NULL')
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -50,7 +48,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findList()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.deleted_at IS NULL')
+            ->orderBy('a.created_at', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

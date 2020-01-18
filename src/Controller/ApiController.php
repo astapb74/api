@@ -66,7 +66,7 @@ class ApiController extends AbstractController
     	if ($id = $request->query->get('id'))
             $article = $repository->findOneById($id);
         elseif($title = $request->query->get('title'))
-            $article = $repository->findByName($title);
+            $article = $repository->findByTitle($title);
         else
             $article = $repository->findList();
 

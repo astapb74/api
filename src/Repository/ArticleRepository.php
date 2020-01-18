@@ -25,7 +25,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findByTitle($title)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.title = :val')
+            ->andWhere('a.title LIKE :val')
             ->setParameter('val', "%$title%")
             ->andWhere('a.deleted_at IS NULL')
             ->orderBy('a.id', 'ASC')

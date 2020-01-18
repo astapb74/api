@@ -39,14 +39,7 @@ class Category
     public function __construct()
     {
        $this->created_at = new \DateTime();
-       //$this->article = new ArrayCollection();
     }
-
-    // public function getArticle()
-    // {
-    //     return $this->article;
-    // }
-
 
     public function getId(): ?int
     {

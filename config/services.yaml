@@ -26,16 +26,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Admin\CategoryAdmin:
-        arguments: [~, App\Entity\Category, ~]
+        arguments: [~, App\Entity\Category, App\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Category }
 
     App\Admin\ArticleAdmin:
-        arguments: [~, App\Entity\Article, ~]
+        arguments: [~, App\Entity\Article, App\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Article }
 
     App\Admin\ArticleAddCategoryAdmin:
-        arguments: [~, App\Entity\ArticleCategory, ~]
+        arguments: [~, App\Entity\ArticleCategory, App\Controller\CRUDController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: ArticleCategory}

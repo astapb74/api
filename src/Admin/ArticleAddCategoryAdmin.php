@@ -28,15 +28,13 @@ final class ArticleAddCategoryAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('created_at', DateRangeFilter::class);
-        // $datagridMapper
-        //     ->add('category.name', null, [], null, ['expanded' => true]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        //$listMapper->addIdentifier('title');
         $listMapper->addIdentifier('created_at');
         $listMapper->add('category.name');
         $listMapper->add('article.title');
     }
+
 }

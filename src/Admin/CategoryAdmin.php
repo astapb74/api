@@ -1,28 +1,20 @@
 <?php
-
-// src/Admin/CityAdmin.php
-
 namespace App\Admin;
 
 use App\Entity\Category;
-//use App\Entity\City;
+use App\Controller\CRUDController;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-use Sonata\AdminBundle\Form\Type\ModelType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Sonata\AdminBundle\Datagrid\{ListMapper, DatagridMapper};
+use Sonata\AdminBundle\Form\{FormMapper, Type\CollectionType, Type\ModelType};
+use Symfony\Component\Form\Extension\Core\Type\{TextType, CheckboxType, TextareaType};
+use Sonata\AdminBundle\Route\RouteCollection;
+
 
 final class CategoryAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', TextType::class);
-        // $formMapper->add('description', TextareaType::class);
-        // $formMapper->add('isBig', CheckboxType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -37,5 +29,37 @@ final class CategoryAdmin extends AbstractAdmin
         $listMapper->addIdentifier('name');
         $listMapper->add('created_at');
         $listMapper->add('updated_at');
+        $listMapper->add('_action', null, [
+            'actions' => [
+                'edit' => [],
+                'delete' => [],
+            ],
+        ]);
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default batch actions (currently only delete)
+        $actions = parent::getBatchActions();
+
+        if (
+          $this->hasRoute('edit') && $this->isGranted('EDIT') &&
+          $this->hasRoute('delete') && $this->isGranted('DELETE')
+        ) {
+            unset($actions['delete']);
+            // $actions['deleted'] = array(
+            //     'label' => 'todeleted', //$this->trans('todeleted', array(), 'App'),
+            //     'ask_confirmation' => true
+            // );
+
+        }
+
+        return $actions;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->add('delete', $this->getRouterIdParameter().'/delete');
     }
 }

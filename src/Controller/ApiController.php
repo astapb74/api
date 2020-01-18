@@ -13,6 +13,8 @@ class ApiController extends AbstractController
 
     protected $username = 'apiuser';
     protected $password = '123456';
+
+    protected $errorMessage = ['error' => ['code' => 0, 'message' => 'Error auth...']];
     /**
      * @Route("/", name="api")
      */
@@ -31,7 +33,7 @@ class ApiController extends AbstractController
         $password = $request->headers->get('php-auth-pw');
 
         if ($username != $this->username || $password != $this->password) {
-            return $this->json(['error' => ['code' => 0, 'message' => 'Error auth...']]);
+            return $this->json($this->errorMessage);
         }
 
         $repository = $this->getDoctrine()->getRepository(Category::class);
@@ -56,7 +58,7 @@ class ApiController extends AbstractController
         $password = $request->headers->get('php-auth-pw');
 
         if ($username != $this->username || $password != $this->password) {
-            return $this->json(['error' => ['code' => 0, 'message' => 'Error auth...']]);
+            return $this->json($this->errorMessage);
         }
 
         $repository = $this->getDoctrine()->getRepository(Article::class);

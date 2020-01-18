@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -41,10 +43,28 @@ class Article
      */
     private $deleted_at;
 
+     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+     * @ORM\JoinTable(name="article_category",
+     *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    private $category;
+
+     /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
+        $this->category = new ArrayCollection();
     }
 
     public function getId(): ?int

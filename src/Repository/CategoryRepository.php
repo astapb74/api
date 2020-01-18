@@ -28,6 +28,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.name LIKE :val')
             ->setParameter('val', "%$name%")
+            ->andWhere('c.deleted_at IS NULL')
             ->orderBy('c.created_at', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
@@ -41,8 +42,19 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.id = :val')
             ->setParameter('val', $id)
+            ->andWhere('c.deleted_at IS NULL')
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function findList()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.deleted_at IS NULL')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
         ;
     }
 

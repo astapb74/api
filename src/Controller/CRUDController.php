@@ -3,8 +3,7 @@ namespace App\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as BaseController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\{Request, RedirectResponse};
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CRUDController extends BaseController

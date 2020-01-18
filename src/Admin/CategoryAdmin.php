@@ -29,6 +29,7 @@ final class CategoryAdmin extends AbstractAdmin
         $listMapper->addIdentifier('name');
         $listMapper->add('created_at');
         $listMapper->add('updated_at');
+        $listMapper->add('deleted_at');
         $listMapper->add('_action', null, [
             'actions' => [
                 'edit' => [],

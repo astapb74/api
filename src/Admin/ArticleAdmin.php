@@ -29,6 +29,7 @@ final class ArticleAdmin extends AbstractAdmin
         $listMapper->addIdentifier('title');
         $listMapper->add('created_at');
         $listMapper->add('updated_at');
+        $listMapper->add('deleted_at');
         $listMapper->add('_action', null, [
             'actions' => [
                 'edit' => [],

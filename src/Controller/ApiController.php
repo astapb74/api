@@ -43,7 +43,7 @@ class ApiController extends AbstractController
         elseif($name = $request->query->get('name'))
             $categoryes = $repository->findByName($name);
         else
-            $categoryes = $repository->findAll();
+            $categoryes = $repository->findList();
 
     	return $this->json($categoryes);
     }
@@ -68,7 +68,7 @@ class ApiController extends AbstractController
         elseif($title = $request->query->get('title'))
             $article = $repository->findByName($title);
         else
-            $article = $repository->findAll();
+            $article = $repository->findList();
 
         return $this->json($article);
     }
